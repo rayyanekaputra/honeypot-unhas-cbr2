@@ -17,7 +17,7 @@ app.post('/api/login', (req, res) => {
       console.error('Failed to record login attempt:', err);
       return res.status(500).send('Server error');
     }
-    res.status(200).send('Login attempt recorded');
+    res.status(200).json({ message: 'wrong password' })
   });
 });
 

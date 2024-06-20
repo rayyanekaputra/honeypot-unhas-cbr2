@@ -6,14 +6,16 @@ import "./App.css";
 function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/login", {
+      const res = await axios.post("http://localhost:5000/api/login", {
         username,
         password,
       });
+      setMessage(res.data.message)
       // alert('Login attempt recorded.');
     } catch (error) {
       alert("An error occurred.");
@@ -23,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        UNHAS's <br />
+        UNHAS <br />
         Admin Panel
       </h1>
       <form onSubmit={handleSubmit}>
@@ -46,6 +48,7 @@ function App() {
           />
         </div>
         <button type="submit">Login</button>
+        {message && <p>Incorrect password</p>}
       </form>
     </div>
   );
