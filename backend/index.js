@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
-const ip = require('ip')
 const app = express();
 
 app.use(cors());
@@ -10,8 +9,7 @@ app.use(bodyParser.json());
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  const logEntry = `${new Date().toISOString()} - IP: ${ip.address()}, Username: ${username}, Password: ${password}\n`;
-
+  const logEntry = `${new Date().toISOString()} IP: ${req.ips}, Username: ${username}, Password: ${password}\n`;
   fs.appendFile('login_attempts.log', logEntry, (err) => {
     if (err) {
       console.error('Failed to record login attempt:', err);
