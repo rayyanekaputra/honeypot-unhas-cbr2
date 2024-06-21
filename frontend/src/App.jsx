@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 
 function App() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
@@ -11,14 +12,14 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post("http://10.163.10.250:5000/api/login", {
+      const res = await axios.post(`${API_BASE_URL}/api/login`, {
         username,
         password,
       });
       setMessage(res.data.message)
       // alert('Login attempt recorded.');
     } catch (error) {
-      alert("An error occurred.");
+      alert("Failed to POST from FE");
     }
   };
 
