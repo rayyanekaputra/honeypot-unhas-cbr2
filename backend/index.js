@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  const logEntry = `${new Date().toISOString()} IP: ${req.ips}, Username: ${username}, Password: ${password}\n`;
+  const logEntry = `${new Date().toISOString()} IP: ${req.ip}, Username: ${username}, Password: ${password}\n`;
   fs.appendFile('login_attempts.log', logEntry, (err) => {
     if (err) {
       console.error('Failed to record login attempt:', err);
